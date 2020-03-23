@@ -62,7 +62,7 @@ export default class Expanded extends Component {
 
     initializeData(){
         this.dataset.forEach(provincialData => {
-            console.log(provincialData);
+            if(!(provincialData.confirmedCases == 0 && provincialData.deaths == 0 && provincialData.recoveries == 0)){
             let individualProvinceRates = [];
             individualProvinceRates.push(
                 {
@@ -94,7 +94,7 @@ export default class Expanded extends Component {
                   }
             )
             this.chartData.push({province: provincialData.province, chart: individualProvinceRates});
-        })
+        }})
         
     }
 }

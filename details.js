@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Button, Modal, TouchableHighlight, RefreshControl } from 'react-native'
+import { Text, View, ActivityIndicator, StyleSheet, Modal, TouchableHighlight, RefreshControl } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
 import { SearchBar, Icon } from 'react-native-elements';
@@ -66,9 +66,10 @@ export default class details extends Component {
 
         return (
             !this.state.hasLoaded ? 
-            <View>
-                <Text> Loading </Text>
-            </View> : 
+            <View style={[styles.loader]}>
+                    <ActivityIndicator size="large" color='#B2BABB' />
+             </View>
+            : 
             <SafeAreaView style={styles.container}>
                 <SearchBar
                     placeholder="Type Here..."
@@ -149,12 +150,16 @@ export default class details extends Component {
                     hasLoaded: true,
                     isRefreshing: false
                 })
-
             })
+        
     }
 }
 
 const styles = StyleSheet.create({
+    loader: {
+        flex: 1,
+        justifyContent: 'center'
+      },
     container: {
       flex: 1
       

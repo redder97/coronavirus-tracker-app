@@ -12,19 +12,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import Map from './Map';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import store from './store';
-import { StoreProvider, createStore } from 'easy-peasy';
+import { StoreProvider} from 'easy-peasy';
 import details from './details';
 
-const source = createStore(store);
 
 
 const Tab = createBottomTabNavigator();
 
 const App: () => React$Node = () => {
   return (
-    <StoreProvider store={source}>
+    <StoreProvider store={store}>
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Details">
+      <Tab.Navigator initialRouteName="Maps">
         <Tab.Screen name="Maps" component={Map} 
         options={{title: 'Map'}}
         />
