@@ -29,6 +29,7 @@ function GlobalStatistics({data}){
 export default class Map extends Component {
 
     state = {
+        scrapedData: {},
         geoData: {},
         topByConfirmedCases : [],
         topByDeaths: [],
@@ -39,6 +40,7 @@ export default class Map extends Component {
     
     componentDidMount(){
         this.fetchComposedData();
+        this.fetchScrapedData();
     }
 
     render() {
@@ -91,7 +93,7 @@ export default class Map extends Component {
                 <ScrollView style={styles.dashBoard}>
                     <View style={styles.row}>
                         <GlobalStatistics
-                            data={this.state.geoData}
+                            data={this.state.scrapedData}
                         />
                         <View style={styles.quarterSection}>
                             <Button 
@@ -107,6 +109,16 @@ export default class Map extends Component {
                 </ScrollView>
             </View>
         )
+    }
+
+    fetchScrapedData(){
+        fetch("http://192.168.1.16:8080/scraped-data")
+        .then(res => res.json())
+        .then(data =>  {
+            this.setState({
+                scrapedData: data
+            })
+        })
     }
 
     fetchComposedData(){
